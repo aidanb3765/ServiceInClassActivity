@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        timerText = findViewById(R.id.textView2)
+        timerText = findViewById(R.id.timeView)
 
         bindService(Intent(this, TimerService::class.java), serviceConnection, BIND_AUTO_CREATE)
 
