@@ -9,9 +9,12 @@ import android.util.Log
 
 @Suppress("ControlFlowWithEmptyBody")
 class TimerService : Service() {
-    lateinit var timerHandler: Handler
+
     private var isRunning = false
+
     lateinit var t: TimerThread
+    lateinit var timerHandler : Handler
+
     private var paused = false
 
     inner class TimerBinder : Binder() {
@@ -44,6 +47,10 @@ class TimerService : Service() {
         // Pause a running timer
         fun pause() {
             this@TimerService.pause()
+        }
+
+        fun getService() : TimerService {
+            return this@TimerService
         }
 
         fun setHandler(handler: Handler) {
@@ -82,12 +89,11 @@ class TimerService : Service() {
                 for (i in startValue downTo 1)  {
                     Log.d("Countdown", i.toString())
 
-                        while (paused);
-                        sleep(1000)
-
-                    if(::timerHandler.isInitialized) {
+                    if (::timerHandler.isInitialized)
                         timerHandler.sendEmptyMessage(i)
-                    }
+
+                    while (paused);
+                    sleep(1000)
 
                 }
                 isRunning = false
